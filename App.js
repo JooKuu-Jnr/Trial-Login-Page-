@@ -1,11 +1,21 @@
 import React, { useState } from 'react';
-import { SafeAreaView, StyleSheet, View, Text, TextInput, TouchableOpacity } from 'react-native'
+import { SafeAreaView, StyleSheet, View, Text, TextInput, TouchableOpacity, Alert } from 'react-native'
+
 
 export default function App(){
   const [form, setForm] = useState({
     email: '',
     password: '',
   });
+  
+  const handleSubmit = ()=>{
+    if(form.email === '' || form.password === ''){
+      Alert.alert('Please Fill in All Required Spaces')}
+      else {
+        Alert.alert('Login Successful')
+      }
+  }
+  
   return(
     <SafeAreaView style={styles.interface}>
       <View style={styles.container}>
@@ -19,7 +29,8 @@ export default function App(){
             style={styles.user}
             placeholder='example@mail.com'
             value={form.email} 
-            onChangeText={email=> setForm({...form, email})}/>
+            onChangeText={email=> setForm({...form, email})}
+            />
           </View>
 
           <View style={styles.input}>
@@ -33,7 +44,8 @@ export default function App(){
           </View>
 
           <View style={styles.press}>
-            <TouchableOpacity>
+            <TouchableOpacity
+          onPress={handleSubmit}>
               <View style={styles.btn}>
                 <Text style={styles.btnText}>Log In</Text>
               </View>
@@ -52,22 +64,20 @@ export default function App(){
 }
 
 const styles = StyleSheet.create({
-  container: {
-    backgroundColor:'#f2f4f5',
-    padding: 30,
-    borderRadius: 20,
-    width:340
-    
-
-  },
   interface: {
     flex: 1,
     alignItems: 'center',
     justifyContent: 'center',
     height: 100,
 
-
   },
+  container: {
+    backgroundColor:'#f2f4f5',
+    padding: 30,
+    borderRadius: 20,
+    width:340
+  },
+  
   title:{
     fontSize: 27,
     fontWeight: '700',
